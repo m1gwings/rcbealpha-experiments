@@ -1,2 +1,2 @@
 # bealpha-experiments
-Experiments for the $\operatorname{BE}(\alpha)$ algorithm.
+Experiments for the $\text{BE}(\alpha)$ algorithm.

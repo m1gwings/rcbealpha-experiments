@@ -30,8 +30,7 @@ def plot_instance(plot_name, instance, T, max_points=100):
         plt.plot(x_plt+1, payoffs[x_plt, i], label=f'Arm {i+1}', alpha=0.7)
 
     plt.xlabel("Round ($t$)")
-    plt.ylabel("Payoffs")
-    plt.title("Instance Payoff Curves Over Time")
+    plt.ylabel("Expected Reward")
     plt.grid(True, linestyle='--', alpha=0.5)
     if instance.K <= 15:
         plt.legend()
@@ -62,7 +61,7 @@ class ExponentialInstance(Instance):
         self.T = T
 
     def next_payoffs(self):
-        payoffs = self.c * (1 - np.exp(-self.a * self.t * 10 / self.T))
+        payoffs = self.c * (1 - np.exp(-self.a * (10 * self.t / self.T)))
         self.t += 1
         return payoffs
 
@@ -166,3 +165,20 @@ class LowerBoundInstance(WindowedInstance):
         self.payoffs = np.full(self.K, self.delta_c)
         self.rng = np.random.default_rng(seed=self.seed)
         self._reset_window()
+
+class FlattenedInstance(Instance):
+    def __init__(self, K, instance, flattening_time):
+        super().__init__(K)
+        self.instance = instance
+        self.flattening_time = flattening_time
+    
+    def next_payoffs(self):
+        self.payoffs = self.instance.next_payoffs() if self.t <= self.flattening_time else self.flat_value
+        if self.t == self.flattening_time:
+            self.flat_value = self.payoffs
+        self.t += 1
+        return self.payoffs
+
+    def reset(self):
+        self.t = 1
+        self.instance.reset()

@@ -52,16 +52,17 @@ class RandomInstance(Instance):
         self.rng = np.random.default_rng(seed=self.seed)
 
 class ExponentialInstance(Instance):
-    def __init__(self, K, T, seed):
+    def __init__(self, K, T, seed, speed=10):
         super().__init__(K)
         
         rng = np.random.default_rng(seed=seed)
+        self.speed = speed
         self.c = 1 - rng.random(K)
         self.a = 1 - rng.random(K)
         self.T = T
 
     def next_payoffs(self):
-        payoffs = self.c * (1 - np.exp(-self.a * (10 * self.t / self.T)))
+        payoffs = self.c * (1 - np.exp(-self.a * (self.speed * self.t / self.T)))
         self.t += 1
         return payoffs
 

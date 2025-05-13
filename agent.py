@@ -60,7 +60,7 @@ class WindowedAgent(Agent):
 
 class RCBEAlphaAgent(WindowedAgent):
     def __init__(self, K, alpha, sigma):
-        super().__init__(K, '$\texttt{RC-BE}(\\alpha)$')
+        super().__init__(K, '$\\operatorname{BE}(\\alpha)$')
         self.alpha = alpha
         self.sigma = sigma
 
@@ -98,7 +98,7 @@ class RCBEAlphaAgent(WindowedAgent):
 
 class Rexp3Agent(WindowedAgent):
     def __init__(self, K, delta, gamma, seed):
-        super().__init__(K, '$\\texttt{Rexp3}$')
+        super().__init__(K, 'Rexp3')
         self.delta = delta
         self.gamma = gamma
         self.seed = seed
@@ -137,7 +137,7 @@ class Rexp3Agent(WindowedAgent):
 
 class RLessUCBAgent(Agent):
     def __init__(self, K, epsilon, alpha, sigma, initial_capacity=2**20):
-        super().__init__(K, '$\texttt{R-less-UCB}$')
+        super().__init__(K, 'R-less-UCB')
         self.epsilon = epsilon
         self.alpha = alpha
         self.sigma = sigma
@@ -203,7 +203,7 @@ class RLessUCBAgent(Agent):
 
 class UCB1Agent(Agent):
     def __init__(self, K, sigma):
-        super().__init__(K, '$\texttt{UCB1}$')
+        super().__init__(K, 'UCB1')
         self.sigma = sigma
 
     def pull(self):

@@ -8,7 +8,14 @@ The required packages are listed in the _Import_ section of the notebook.
 ## Cite RC-BE(α)
 If you are using this code for your scientific publications, please cite:
 ```
-TO APPEAR
+@article{migali2026tightening,
+  title={Tightening regret lower and upper bounds in restless rising bandits},
+  author={Migali, Cristiano and Mussi, Marco and Genalti, Gianmarco and Metelli, Alberto Maria},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  pages={18437--18478},
+  year={2026}
+}
 ```
 
 ## How to Contact Us
